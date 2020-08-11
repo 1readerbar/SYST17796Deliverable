@@ -5,26 +5,40 @@
  */
 package ca.sheridancollege.project;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author The Master
  */
-public class GoFish {
-    
-    public GoFish(Player player, Deck deck){}
-    
-    public boolean askPlayerForCard(Player player, int card){
-        
+public class GoFish extends Game {
+
+    public GoFish(String gameName, ArrayList<Player> players, Deck deck) {
+        super(gameName, players);
     }
-    
-    public void goFishing(Player player, Hand hand, Deck deck){
-    
+
+    public boolean askPlayerForCard(Player player, int card) {
+
+        return true;
     }
-    
-    public int scores(){
-        return score;
+
+    public void goFishing(Player player, Hand hand, Deck deck) {
+
     }
-    public void endGame(){
-    
+
+    public int scores() {
+        return 1;
+    }
+
+    public void endGame() {
+
+    }
+
+    public void play() {
+
+    }
+
+    public void declareWinner() {
+
     }
 }
