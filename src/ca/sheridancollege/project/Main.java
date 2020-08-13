@@ -29,6 +29,8 @@ public class Main {
                 tempCards.add(tempCard);
             }
         }
+
+        // SHUFFLES DECK AND RESTORES INTO SIMPLER VARIABLE
         GroupOfCards tempDeck = new GroupOfCards(DECK_COUNT, tempCards);
         tempDeck.shuffle();
         ArrayList<Card> deck = tempDeck.getCards();
@@ -40,18 +42,65 @@ public class Main {
         for (int i = 0; i < playerCount; i++) {
 
             // GENERATES HAND
-            ArrayList<Card> tempHand = new ArrayList<Card>();
+            ArrayList<Card> hand = new ArrayList<Card>();
             for (int j = 0; j < BASE_HAND_COUNT; j++) {
-                tempHand.add(deck.remove(j));
+                hand.add(deck.remove(j));
             }
 
-            Player player = new Player(String.format("%d", i), "Barrett", tempHand, 0);
+            System.out.print("Please enter player name: ");
+            String name = input.next();
 
-            players.add(player);
-
+            players.add(new Player(String.format("%d", i + 1), name, hand, 0));
         }
 
-        System.out.print(players.toString());
+        // GOFISH STARTS HERE
+        GoFish goFish = new GoFish("Go-Fish", players);
 
+        // while (deck.size() > 0) {
+
+        // TURN START
+        for (int i = 0; i < playerCount; i++) {
+            System.out.print("Please select player to confront from the list using the number besides the name: ");
+            for (Player player : players) {
+                System.out.print(player.getName() + " (" + player.getId() + ")   ");
+            }
+            int playerNumber = input.nextInt();
+
+            Player targetPlayer = players.get(playerNumber - 1);
+
+            System.out.print("What card do you want to ask for? (A 2 3 4 5 6 7 8 9 10 J Q K): ");
+            String targetCard = input.next();
+
+            // GETS INPUTTED CARD VALUE REGARDLESS OF LETTER
+            int cardValue;
+            if (targetCard.equalsIgnoreCase("A")) {
+                cardValue = 1;
+            } else if (targetCard.equalsIgnoreCase("J")) {
+                cardValue = 11;
+            } else if (targetCard.equalsIgnoreCase("Q")) {
+                cardValue = 12;
+            } else if (targetCard.equalsIgnoreCase("K")) {
+                cardValue = 13;
+            } else {
+                cardValue = Integer.parseInt(targetCard);
+            }
+
+            int numOfMatches = goFish.askPlayerForCard(targetPlayer, cardValue);
+            if (numOfMatches < 1) {
+                // end of players turn, next players turn
+            } else {
+                // continue
+            }
+        }
+
+        // }
+
+        System.out.print("Please select from the list using the number: ");
+
+        // TEMPORARY (PROVES CREATION OF PLAYERS AND HANDS)
+        for (Player player : players) {
+            System.out.println(player.getName());
+        }
+        input.close();
     }
 }
