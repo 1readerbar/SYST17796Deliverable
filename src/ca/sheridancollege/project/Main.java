@@ -33,22 +33,25 @@ public class Main {
         tempDeck.shuffle();
         ArrayList<Card> deck = tempDeck.getCards();
 
+        ArrayList<Player> players = new ArrayList<Player>();
         System.out.println("how many players?");
         int playerCount = input.nextInt();
 
         for (int i = 0; i < playerCount; i++) {
 
+            // GENERATES HAND
+            ArrayList<Card> tempHand = new ArrayList<Card>();
+            for (int j = 0; j < BASE_HAND_COUNT; j++) {
+                tempHand.add(deck.remove(j));
+            }
+
+            Player player = new Player(String.format("%d", i), "Barrett", tempHand, 0);
+
+            players.add(player);
+
         }
 
-        // GENERATES HAND
-        ArrayList<Card> tempHand = new ArrayList<Card>();
-        for (int i = 0; i < BASE_HAND_COUNT; i++) {
-            tempHand.add(deck.remove(i));
-        }
+        System.out.print(players.toString());
 
-        Player player1 = new Player("1", "Barrett", tempHand, 0);
-
-        ArrayList<Player> players = new ArrayList<Player>();
-        players.add(player1);
     }
 }
