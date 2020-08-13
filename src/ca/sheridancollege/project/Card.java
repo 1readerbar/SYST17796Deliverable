@@ -12,7 +12,7 @@ package ca.sheridancollege.project;
  * 
  * @author dancye, 2018
  */
-public abstract class Card {
+public class Card {
     private int value;
     // default modifier for child classes
 
@@ -32,6 +32,11 @@ public abstract class Card {
      */
 
     @Override
-    public abstract String toString();
+    public String toString() {
+
+        // TODO?????????
+
+        return String.format("%d", value);
+    }
 
 }

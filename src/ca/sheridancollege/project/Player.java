@@ -13,11 +13,11 @@ import java.util.ArrayList;
  * 
  * @author dancye, 2018
  */
-public abstract class Player {
+public class Player {
 
-    private String playerID; // the unique ID for this player
+    private String id; // the unique ID for this player
     private String name;
-    private Hand hand;
+    private ArrayList<Card> hand;
     private int attribute;
     public int score;
 
@@ -27,14 +27,21 @@ public abstract class Player {
      * @param name the unique ID to assign to this player.
      */
     public Player(String name) {
-        playerID = name;
+        this.name = name;
+    }
+
+    public Player(String id, String name, ArrayList<Card> cards, int score) {
+        this.id = id;
+        this.name = name;
+        this.hand = cards;
+        this.score = score;
     }
 
     /**
      * @return the playerID
      */
-    public String getPlayerID() {
-        return playerID;
+    public String getId() {
+        return id;
     }
 
     /**
@@ -75,7 +82,7 @@ public abstract class Player {
      * @param givenID the playerID to set
      */
     public void setPlayerID(String givenID) {
-        playerID = givenID;
+        id = givenID;
     }
 
     /**
@@ -109,11 +116,5 @@ public abstract class Player {
     public void setScore(int score) {
         this.score = score;
     }
-
-    /**
-     * The method to be instantiated when you subclass the Player class with your
-     * specific type of Player and filled in with logic to play your game.
-     */
-    public abstract void play();
 
 }
