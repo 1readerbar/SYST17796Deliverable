@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class GoFish extends Game {
 
-    public GoFish(String gameName, ArrayList<Player> players, Deck deck) {
+    public GoFish(String gameName, ArrayList<Player> players) {
         super(gameName, players);
     }
 
@@ -22,7 +22,7 @@ public class GoFish extends Game {
         return true;
     }
 
-    public void goFishing(Player player, Hand hand, Deck deck) {
+    public void goFishing(Player player, Hand hand) {
 
     }
 
