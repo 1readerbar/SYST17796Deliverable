@@ -6,6 +6,7 @@
 package ca.sheridancollege.project;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  *
@@ -17,18 +18,26 @@ public class GoFish extends Game {
         super(gameName, players);
     }
 
-    public boolean askPlayerForCard(Player player, int card) {
-
-        return true;
+    public int askPlayerForCard(Player player, int card) {
+        
+        int numMatch = 0;
+        
+        Card cardToMatch = new Card(card);
+        
+        for(int i = 0; i < player.getHand().size(); i++)
+            if(player.getHand().get(i) == cardToMatch){
+                numMatch++;
+            }
+        
+            return numMatch;
     }
 
-    public void goFishing(Player player) {
+    //taking card from deck
+    public void goFishing(Player player, ArrayList<Card> cards) {
 
+        player.getHand().add(cards.remove(cards.size() - 1));
     }
 
-    public int scores() {
-        return 1;
-    }
 
     public void endGame() {
 
@@ -38,8 +47,19 @@ public class GoFish extends Game {
 
     }
 
-    public void declareWinner() {
+    public String declareWinner(ArrayList<Player> players) {
 
+        int max = 0;
+        String name = "";
+        for(int i = 0; i < players.size(); i++){
+           
+            if(players.get(i).getScore() > max){
+                max = players.get(i).getScore();
+                name = players.get(i).getName();
+            }
+        }
+        
+        return name;
     }
 
     public boolean hasBook(Player player) {
