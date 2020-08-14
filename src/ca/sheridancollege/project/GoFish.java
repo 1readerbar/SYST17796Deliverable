@@ -29,9 +29,28 @@ public class GoFish extends Game {
         return numMatch;
     }
 
+    public void removeIfHasBook(Player currentPlayer, int targetCardValue) {
+
+        if (hasBook(currentPlayer)) {
+            currentPlayer.score++;
+
+            ArrayList<Card> currentPlayerHand = currentPlayer.getHand();
+            int currentPlayerHandSize = currentPlayerHand.size();
+
+            for (int i = currentPlayerHandSize; i > 0; i--) {
+                Card card = currentPlayerHand.get(i - 1);
+                if (card.getValue() == targetCardValue) {
+                    currentPlayerHand.remove(card);
+                }
+            }
+        }
+    }
+
     // taking card from deck
     public void goFishing(Player player, ArrayList<Card> cards) {
-        player.getHand().add(cards.remove(cards.size() - 1));
+        if (player.getHand().size() != 0) {
+            player.getHand().add(cards.remove(cards.size() - 1));
+        }
     }
 
     /**
@@ -41,7 +60,7 @@ public class GoFish extends Game {
      * @param targetPlayer
      * @param targetCardValue
      */
-    public static void getCardsFromPlayer(Player currentPlayer, Player targetPlayer, int targetCardValue) {
+    public void getCardsFromPlayer(Player currentPlayer, Player targetPlayer, int targetCardValue) {
         ArrayList<Card> currentPlayerHand = currentPlayer.getHand();
         ArrayList<Card> targetPlayerHand = targetPlayer.getHand();
         int targetPlayerHandSize = targetPlayerHand.size();
