@@ -15,14 +15,24 @@ package ca.sheridancollege.project;
  */
 public class Card {
 
-    //
+    // Value used to make card.
     private int value;
     // default modifier for child classes
 
+    /**
+     * Contructs a card object with specified value.
+     * 
+     * @param value
+     */
     public Card(int value) {
         this.value = value;
     }
 
+    /**
+     * Returns the value of the card.
+     * 
+     * @return value
+     */
     public int getValue() {
         return value;
     }
