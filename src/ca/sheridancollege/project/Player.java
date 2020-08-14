@@ -1,21 +1,17 @@
-/**
- * SYST 17796 Project Winter 2019 Base code.
- * Students can modify and extend to implement their game.
- * Add your name as a modifier and the date!
- */
 package ca.sheridancollege.project;
 
 import java.util.ArrayList;
 
 /**
  * A class that models each Player in the game. Players have an identifier,
- * which should be unique.
+ * that is unique.
  * 
- * @author dancye, 2018
+ * @modifier Barrett, 2020
  */
 public class Player {
 
-    private String id; // the unique ID for this player
+    // the unique ID for this player
+    private String id; 
     private String name;
     private ArrayList<Card> hand;
     private int attribute;
@@ -30,6 +26,13 @@ public class Player {
         this.name = name;
     }
 
+    /**
+     * a constructor to take for the variables and array list
+     * @param id
+     * @param name
+     * @param cards
+     * @param score
+     */
     public Player(String id, String name, ArrayList<Card> cards, int score) {
         this.id = id;
         this.name = name;
@@ -38,6 +41,7 @@ public class Player {
     }
 
     /**
+     * getter for ID
      * @return the playerID
      */
     public String getId() {
@@ -45,7 +49,7 @@ public class Player {
     }
 
     /**
-     * 
+     * getter for name
      * @return
      */
     public String getName() {
@@ -53,7 +57,7 @@ public class Player {
     }
 
     /**
-     * 
+     * getter for hand
      * @return
      */
     public ArrayList<Card> getHand() {
@@ -61,7 +65,7 @@ public class Player {
     }
 
     /**
-     * 
+     * getter for attribute
      * @return
      */
     public int getAttribute() {
@@ -69,7 +73,7 @@ public class Player {
     }
 
     /**
-     * 
+     * getter for score
      * @return
      */
     public int getScore() {
@@ -77,16 +81,16 @@ public class Player {
     }
 
     /**
-     * Ensure that the playerID is unique
+     * unique playerID
      * 
-     * @param givenID the playerID to set
+     * @param givenID
      */
     public void setPlayerID(String givenID) {
         id = givenID;
     }
 
     /**
-     * 
+     * setter for name
      * @param name
      */
     public void setName(String name) {
@@ -94,7 +98,7 @@ public class Player {
     }
 
     /**
-     * 
+     * setter for hand
      * @param name
      */
     public void setHand(ArrayList<Card> hand) {
@@ -102,7 +106,7 @@ public class Player {
     }
 
     /**
-     * 
+     * setter for attribute
      * @param name
      */
     public void setAttribute(int attribute) {
@@ -110,7 +114,7 @@ public class Player {
     }
 
     /**
-     * 
+     * setter for score
      * @param name
      */
     public void setScore(int score) {
