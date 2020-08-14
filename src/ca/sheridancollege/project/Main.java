@@ -38,6 +38,7 @@ public class Main {
         tempDeck.shuffle();
         ArrayList<Card> deck = tempDeck.getCards();
 
+        // TAKES INPUT FOR AMOUNT OF PLAYERS AND VALIDATES
         ArrayList<Player> players = new ArrayList<Player>();
         System.out.println("How many players?");
         int playerCount = input.nextInt();
@@ -46,9 +47,8 @@ public class Main {
             playerCount = input.nextInt();
         }
 
+        // GENERATES HAND FOR EACH INPUTTED PLAYER
         for (int i = 0; i < playerCount; i++) {
-
-            // GENERATES HAND
             ArrayList<Card> hand = new ArrayList<Card>();
             for (int j = 0; j < BASE_HAND_COUNT; j++) {
                 hand.add(deck.remove(j));
@@ -63,26 +63,32 @@ public class Main {
         // GOFISH STARTS HERE
         GoFish goFish = new GoFish("Go-Fish", players);
 
+        // RUNS UNTIL DECK IS EMPTY
         while (deck.size() > 0) {
 
             int counter = 0;
             boolean activeTurn = true;
 
+            // ROTATES THROUGH PLAYERS (TURNS)
             while (counter < playerCount) {
                 do {
-
                     // TURN START
+
+                    // DISPLAYS CURRENT PLAYERS NAME, SCORE, AND HAND
                     Player currentPlayer = players.get(counter);
-                    System.out.println(
-                            "Current Player Turn: " + currentPlayer.getName() + " | Score: " + currentPlayer.score);
+                    System.out.println("Current Player Turn: " + currentPlayer.getName());
+                    System.out.println("Score: " + currentPlayer.score);
                     System.out.println("Current Hand: " + currentPlayer.getHand() + "\n");
 
+                    // PROMPTS CURRENT PLAYER TO SELECT OTHER PLAYER
                     System.out
                             .print("Please select player to confront from the list using the number beside the name [");
                     for (Player player : players) {
                         System.out.print(" " + player.getName() + " (" + player.getId() + ") ");
                     }
+                    System.out.print("]: ");
 
+                    // VALIDATES SELECTION OF OTHER PLAYER
                     int playerNumber = input.nextInt();
                     while (playerNumber == Integer.parseInt(currentPlayer.getId()) || playerNumber > playerCount
                             || playerNumber != (int) playerNumber) {
@@ -90,8 +96,10 @@ public class Main {
                         playerNumber = input.nextInt();
                     }
 
+                    // CORRECTS SELECTION
                     Player targetPlayer = players.get(playerNumber - 1);
 
+                    // PROMPTS USER FOR CARD SELECTION
                     System.out.print("What card do you want to ask for? (A 2 3 4 5 6 7 8 9 10 J Q K): ");
                     String targetCard = input.next();
 
