@@ -17,14 +17,12 @@ public class GoFish extends Game {
         super(gameName, players);
     }
 
-    public int askPlayerForCard(Player player, int card) {
+    public int askPlayerForCard(Player player, int cardValue) {
 
         int numMatch = 0;
 
-        Card cardToMatch = new Card(card);
-
         for (int i = 0; i < player.getHand().size(); i++)
-            if (player.getHand().get(i) == cardToMatch) {
+            if (player.getHand().get(i).getValue() == cardValue) {
                 numMatch++;
             }
 
@@ -33,16 +31,31 @@ public class GoFish extends Game {
 
     // taking card from deck
     public void goFishing(Player player, ArrayList<Card> cards) {
-
         player.getHand().add(cards.remove(cards.size() - 1));
     }
 
-    public void endGame() {
+    /**
+     * get cards from the target player
+     * 
+     * @param currentPlayer
+     * @param targetPlayer
+     * @param targetCardValue
+     */
+    public static void getCardsFromPlayer(Player currentPlayer, Player targetPlayer, int targetCardValue) {
+        ArrayList<Card> currentPlayerHand = currentPlayer.getHand();
+        ArrayList<Card> targetPlayerHand = targetPlayer.getHand();
+        int targetPlayerHandSize = targetPlayerHand.size();
+        int j = 0;
 
-    }
-
-    public void play() {
-
+        for (j = 0; j < targetPlayerHandSize; j++) {
+            Card card = targetPlayerHand.get(j);
+            if (card.getValue() == targetCardValue) {
+                currentPlayerHand.add(card);
+                targetPlayerHand.remove(card);
+                targetPlayerHandSize--;
+                j = 0;
+            }
+        }
     }
 
     @Override

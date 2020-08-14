@@ -56,22 +56,26 @@ public class Main {
         // GOFISH STARTS HERE
         GoFish goFish = new GoFish("Go-Fish", players);
 
-        while (deck.size() > 0) {
+        while (deck.size() > -1) {
 
+            int counter = 0;
             boolean activeTurn = true;
 
-            do {
+            while (counter < playerCount) {
 
-                // TURN START
-                for (int i = 0; i < playerCount; i++) {
-                    Player currentPlayer = players.get(i);
-                    System.out.println("Current Player Turn: " + currentPlayer.getName());
+                do {
 
-                    System.out.print(
-                            "Please select player to confront from the list using the number besides the name: ");
+                    // TURN START
+
+                    Player currentPlayer = players.get(counter);
+                    System.out.println("Current Player Turn: " + currentPlayer.getName() + " " + currentPlayer.score);
+
+                    System.out
+                            .print("Please select player to confront from the list using the number beside the name: ");
                     for (Player player : players) {
                         System.out.print(player.getName() + " (" + player.getId() + ")   ");
                     }
+                    //////
                     int playerNumber = input.nextInt();
 
                     Player targetPlayer = players.get(playerNumber - 1);
@@ -93,26 +97,42 @@ public class Main {
                         targetCardValue = Integer.parseInt(targetCard);
                     }
 
+                    System.out.println(targetCardValue + " " + targetPlayer.getName());
+
                     int numOfMatches = goFish.askPlayerForCard(targetPlayer, targetCardValue);
                     if (numOfMatches < 1) {
+                        goFish.goFishing(currentPlayer, deck);
                         activeTurn = false;
-                    } else {
-                        // get cards from the target player
-                        ArrayList<Card> currentPlayerHand = currentPlayer.getHand();
-                        ArrayList<Card> targetPlayerHand = targetPlayer.getHand();
+                        counter++;
 
-                        for (int j = 0; j < targetPlayerHand.size(); j++) {
-                            Card card = targetPlayerHand.get(j);
-                            if (card.getValue() == targetCardValue) {
-                                currentPlayerHand.add(card);
-                                targetPlayerHand.remove(card);
+                    } else {
+                        GoFish.getCardsFromPlayer(currentPlayer, targetPlayer, targetCardValue);
+
+                        if (goFish.hasBook(currentPlayer)) {
+                            currentPlayer.score++;
+
+                            ArrayList<Card> currentPlayerHand = currentPlayer.getHand();
+                            int currentPlayerHandSize = currentPlayerHand.size();
+
+                            for (int i = currentPlayerHandSize; i > 0; i--) {
+                                Card card = currentPlayerHand.get(i - 1);
+                                if (card.getValue() == targetCardValue) {
+                                    currentPlayerHand.remove(card);
+
+                                }
                             }
                         }
+
                     }
 
-                }
+                    for (Player player : players) {
+                        System.out.println(player.getName());
+                        System.out.println(player.getHand());
+                    }
 
-            } while (activeTurn);
+                } while (activeTurn);
+
+            }
 
         }
 
