@@ -56,44 +56,52 @@ public class Main {
         // GOFISH STARTS HERE
         GoFish goFish = new GoFish("Go-Fish", players);
 
-        // while (deck.size() > 0) {
+        while (deck.size() > 0) {
 
-        // TURN START
-        for (int i = 0; i < playerCount; i++) {
-            System.out.print("Please select player to confront from the list using the number besides the name: ");
-            for (Player player : players) {
-                System.out.print(player.getName() + " (" + player.getId() + ")   ");
-            }
-            int playerNumber = input.nextInt();
+            boolean activeTurn = true;
 
-            Player targetPlayer = players.get(playerNumber - 1);
+            do {
 
-            System.out.print("What card do you want to ask for? (A 2 3 4 5 6 7 8 9 10 J Q K): ");
-            String targetCard = input.next();
+                // TURN START
+                for (int i = 0; i < playerCount; i++) {
+                    System.out.println("Current Player Turn: " + players.get(playerCount).getName());
 
-            // GETS INPUTTED CARD VALUE REGARDLESS OF LETTER
-            int cardValue;
-            if (targetCard.equalsIgnoreCase("A")) {
-                cardValue = 1;
-            } else if (targetCard.equalsIgnoreCase("J")) {
-                cardValue = 11;
-            } else if (targetCard.equalsIgnoreCase("Q")) {
-                cardValue = 12;
-            } else if (targetCard.equalsIgnoreCase("K")) {
-                cardValue = 13;
-            } else {
-                cardValue = Integer.parseInt(targetCard);
-            }
+                    System.out.print(
+                            "Please select player to confront from the list using the number besides the name: ");
+                    for (Player player : players) {
+                        System.out.print(player.getName() + " (" + player.getId() + ")   ");
+                    }
+                    int playerNumber = input.nextInt();
 
-            int numOfMatches = goFish.askPlayerForCard(targetPlayer, cardValue);
-            if (numOfMatches < 1) {
-                // end of players turn, next players turn
-            } else {
-                // continue
-            }
+                    Player targetPlayer = players.get(playerNumber - 1);
+
+                    System.out.print("What card do you want to ask for? (A 2 3 4 5 6 7 8 9 10 J Q K): ");
+                    String targetCard = input.next();
+
+                    // GETS INPUTTED CARD VALUE REGARDLESS OF LETTER
+                    int cardValue;
+                    if (targetCard.equalsIgnoreCase("A")) {
+                        cardValue = 1;
+                    } else if (targetCard.equalsIgnoreCase("J")) {
+                        cardValue = 11;
+                    } else if (targetCard.equalsIgnoreCase("Q")) {
+                        cardValue = 12;
+                    } else if (targetCard.equalsIgnoreCase("K")) {
+                        cardValue = 13;
+                    } else {
+                        cardValue = Integer.parseInt(targetCard);
+                    }
+
+                    int numOfMatches = goFish.askPlayerForCard(targetPlayer, cardValue);
+                    if (numOfMatches < 1) {
+                        activeTurn = false;
+                    }
+
+                }
+
+            } while (activeTurn);
+
         }
-
-        // }
 
         System.out.print("Please select from the list using the number: ");
 
