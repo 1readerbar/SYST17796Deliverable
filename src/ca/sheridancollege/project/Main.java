@@ -1,23 +1,25 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ca.sheridancollege.project;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- *
- * @author The Master
+ *This is the main class from the go fish game that
+ holds the main method game
+ * @modifier Barrett, 2020
  */
 public class Main {
 
+    /**
+     * main method for the game
+     * @param args
+     */
     public static void main(String[] args) {
 
+        //initializing deck count and base hand
         final int DECK_COUNT = 52;
         final int BASE_HAND_COUNT = 5;
+        //initializing the scanner
         Scanner input = new Scanner(System.in);
 
         // GENERATES DECK
@@ -75,7 +77,7 @@ public class Main {
                     for (Player player : players) {
                         System.out.print(player.getName() + " (" + player.getId() + ")   ");
                     }
-                    //////
+                    
                     int playerNumber = input.nextInt();
 
                     Player targetPlayer = players.get(playerNumber - 1);

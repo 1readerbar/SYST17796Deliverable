@@ -1,22 +1,30 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ca.sheridancollege.project;
 
 import java.util.ArrayList;
 
 /**
- *
- * @author The Master
+ *This class is for the fo-fish methods used to play the game
+ * @modifier Barrett, 2020
  */
 public class GoFish extends Game {
 
+    /**
+     * This is a constructor for go-fish taking in given name
+     * and array list players
+     * @param gameName
+     * @param players
+     */
     public GoFish(String gameName, ArrayList<Player> players) {
         super(gameName, players);
     }
 
+    /**
+     * This is the ask player for card method to take in
+     * both player and card value to return numMatch
+     * @param player
+     * @param cardValue
+     * @return
+     */
     public int askPlayerForCard(Player player, int cardValue) {
 
         int numMatch = 0;
@@ -29,7 +37,11 @@ public class GoFish extends Game {
         return numMatch;
     }
 
-    // taking card from deck
+    /**
+     * taking card from the deck
+     * @param player
+     * @param cards
+     */
     public void goFishing(Player player, ArrayList<Card> cards) {
         player.getHand().add(cards.remove(cards.size() - 1));
     }
@@ -58,6 +70,9 @@ public class GoFish extends Game {
         }
     }
 
+    /**
+     * override method to declare the winner of the game and end game
+     */
     @Override
     public void declareWinner(ArrayList<Player> players) {
 
@@ -74,6 +89,11 @@ public class GoFish extends Game {
         System.out.println("The winner is " + name + "with a score of " + max);
     }
 
+    /**
+     * seeing if there is a book in the player
+     * @param player
+     * @return
+     */
     public boolean hasBook(Player player) {
         ArrayList<Card> hand = player.getHand();
         int[] ranks = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };

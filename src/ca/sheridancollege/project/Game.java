@@ -1,23 +1,24 @@
-/**
- * SYST 17796 Project Winter 2019 Base code.
- * Students can modify and extend to implement their game.
- * Add your name as a modifier and the date!
- */
 package ca.sheridancollege.project;
 
 import java.util.ArrayList;
 
 /**
- * The class that models your game. You should create a more specific child of
- * this class and instantiate the methods given.
+ * The class that models the game.
  * 
- * @author dancye, 2018
+ * @modifier Barrett, 2020
  */
 public abstract class Game {
 
-    private final String gameName;// the title of the game
-    private ArrayList<Player> players;// the players of the game
+    //the title of the game
+    private final String gameName;
+    // the players of the game
+    private ArrayList<Player> players;
 
+    /**
+     * constructor for given name and player
+     * @param givenName
+     * @param players
+     */
     public Game(String givenName, ArrayList<Player> players) {
         this.gameName = givenName;
         this.players = players;
@@ -45,8 +46,8 @@ public abstract class Game {
     }
 
     /**
-     * When the game is over, use this method to declare and display a winning
-     * player.
+     * This method to declare and display a winning
+     * player and end the game.
      */
     public abstract void declareWinner(ArrayList<Player> players);
 

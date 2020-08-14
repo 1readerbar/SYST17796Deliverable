@@ -1,39 +1,37 @@
-/**
- * SYST 17796 Project Winter 2019 Base code.
- * Students can modify and extend to implement their game.
- * Add your name as a modifier and the date!
- */
 package ca.sheridancollege.project;
 
 /**
- * A class to be used as the base Card class for the project. Must be general
- * enough to be instantiated for any Card game. Students wishing to add to the
- * code should remember to add themselves as a modifier.
+ * A class is be used as the base Card class for the go-fish game.
  * 
- * @author dancye, 2018
- * @author esteban
+ * @modifier Barrett, 2020
  */
 public class Card {
 
-    //
+    //the value
     private int value;
-    // default modifier for child classes
 
+    /**
+     * constructor for value
+     * @param value
+     */
     public Card(int value) {
         this.value = value;
     }
-
+    
+    /**
+     * getter for integer value
+     * @return
+     */
     public int getValue() {
         return value;
     }
 
     /**
-     * Students should implement this method for their specific children classes
+     * to string method to return card value string
      * 
      * @return a String representation of a card. Could be an UNO card, a regular
      *         playing card etc.
      */
-
     @Override
     public String toString() {
 
