@@ -11,9 +11,11 @@ package ca.sheridancollege.project;
  * code should remember to add themselves as a modifier.
  * 
  * @author dancye, 2018
+ * @author esteban
  */
 public class Card {
-    
+
+    //
     private int value;
     // default modifier for child classes
 
@@ -35,9 +37,25 @@ public class Card {
     @Override
     public String toString() {
 
-        // TODO?????????
+        String cardname;
 
-        return String.format("%d", value);
+        if(value == 1){
+            cardname = "A";
+            return String.format("%s", cardname);
+        } else if (value == 11){
+            cardname = "J";
+            return String.format("%s", cardname);
+        } else if (value == 12){
+            cardname = "Q";
+            return String.format("%s", cardname);
+        } else if (value == 13){
+            cardname = "K";
+            return String.format("%s", cardname);
+        } else {
+
+            return String.format("%d", value);
+        }
+        
     }
 
 }
