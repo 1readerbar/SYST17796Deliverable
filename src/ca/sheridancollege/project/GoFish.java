@@ -3,14 +3,15 @@ package ca.sheridancollege.project;
 import java.util.ArrayList;
 
 /**
- *This class is for the fo-fish methods used to play the game
+ * This class is for the fo-fish methods used to play the game
+ * 
  * @modifier Barrett, Esteban, Chris 2020
  */
 public class GoFish extends Game {
 
     /**
-     * This is a constructor for go-fish taking in given name
-     * and array list players
+     * This is a constructor for go-fish taking in given name and array list players
+     * 
      * @param gameName
      * @param players
      */
@@ -19,8 +20,9 @@ public class GoFish extends Game {
     }
 
     /**
-     * This is the ask player for card method to take in
-     * both player and card value to return numMatch
+     * This is the ask player for card method to take in both player and card value
+     * to return numMatch
+     * 
      * @param player
      * @param cardValue
      * @return
@@ -39,11 +41,32 @@ public class GoFish extends Game {
 
     /**
      * taking card from the deck
+     * 
      * @param player
      * @param cards
      */
+    public void removeIfHasBook(Player currentPlayer, int targetCardValue) {
+
+        if (hasBook(currentPlayer)) {
+            currentPlayer.score++;
+
+            ArrayList<Card> currentPlayerHand = currentPlayer.getHand();
+            int currentPlayerHandSize = currentPlayerHand.size();
+
+            for (int i = currentPlayerHandSize; i > 0; i--) {
+                Card card = currentPlayerHand.get(i - 1);
+                if (card.getValue() == targetCardValue) {
+                    currentPlayerHand.remove(card);
+                }
+            }
+        }
+    }
+
+    // taking card from deck
     public void goFishing(Player player, ArrayList<Card> cards) {
-        player.getHand().add(cards.remove(cards.size() - 1));
+        if (player.getHand().size() != 0) {
+            player.getHand().add(cards.remove(cards.size() - 1));
+        }
     }
 
     /**
@@ -53,7 +76,7 @@ public class GoFish extends Game {
      * @param targetPlayer
      * @param targetCardValue
      */
-    public static void getCardsFromPlayer(Player currentPlayer, Player targetPlayer, int targetCardValue) {
+    public void getCardsFromPlayer(Player currentPlayer, Player targetPlayer, int targetCardValue) {
         ArrayList<Card> currentPlayerHand = currentPlayer.getHand();
         ArrayList<Card> targetPlayerHand = targetPlayer.getHand();
         int targetPlayerHandSize = targetPlayerHand.size();
@@ -89,25 +112,9 @@ public class GoFish extends Game {
         System.out.println("The winner is " + name + "with a score of " + max);
     }
 
-    public void removeIfHasBook(Player currentPlayer, int targetCardValue) {
-
-        if (hasBook(currentPlayer)) {
-            currentPlayer.score++;
-
-            ArrayList<Card> currentPlayerHand = currentPlayer.getHand();
-            int currentPlayerHandSize = currentPlayerHand.size();
-
-            for (int i = currentPlayerHandSize; i > 0; i--) {
-                Card card = currentPlayerHand.get(i - 1);
-                if (card.getValue() == targetCardValue) {
-                    currentPlayerHand.remove(card);
-                }
-            }
-        }
-    }
-
     /**
      * seeing if there is a book in the player
+     * 
      * @param player
      * @return
      */

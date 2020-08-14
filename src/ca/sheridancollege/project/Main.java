@@ -4,22 +4,23 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- *This is the main class from the go fish game that
- holds the main method game
+ * This is the main class from the go fish game that holds the main method game
+ * 
  * @modifier Barrett, Esteban, Chris 2020
  */
 public class Main {
 
     /**
      * main method for the game
+     * 
      * @param args
      */
     public static void main(String[] args) {
 
-        //initializing deck count and base hand
+        // initializing deck count and base hand
         final int DECK_COUNT = 52;
         final int BASE_HAND_COUNT = 5;
-        //initializing the scanner
+        // initializing the scanner
         Scanner input = new Scanner(System.in);
 
         // GENERATES DECK
@@ -38,8 +39,12 @@ public class Main {
         ArrayList<Card> deck = tempDeck.getCards();
 
         ArrayList<Player> players = new ArrayList<Player>();
-        System.out.println("how many players?");
+        System.out.println("How many players?");
         int playerCount = input.nextInt();
+        while (playerCount <= 1 || playerCount > 6) {
+            System.out.print("Pick a number from 2-6: ");
+            playerCount = input.nextInt();
+        }
 
         for (int i = 0; i < playerCount; i++) {
 
@@ -58,27 +63,32 @@ public class Main {
         // GOFISH STARTS HERE
         GoFish goFish = new GoFish("Go-Fish", players);
 
-        while (deck.size() > -1) {
+        while (deck.size() > 0) {
 
             int counter = 0;
             boolean activeTurn = true;
 
             while (counter < playerCount) {
-
                 do {
 
                     // TURN START
-
                     Player currentPlayer = players.get(counter);
-                    System.out.println("Current Player Turn: " + currentPlayer.getName() + " " + currentPlayer.score);
+                    System.out.println(
+                            "Current Player Turn: " + currentPlayer.getName() + " | Score: " + currentPlayer.score);
+                    System.out.println("Current Hand: " + currentPlayer.getHand() + "\n");
 
                     System.out
-                            .print("Please select player to confront from the list using the number beside the name: ");
+                            .print("Please select player to confront from the list using the number beside the name [");
                     for (Player player : players) {
-                        System.out.print(player.getName() + " (" + player.getId() + ")   ");
+                        System.out.print(" " + player.getName() + " (" + player.getId() + ") ");
                     }
-                    
+
                     int playerNumber = input.nextInt();
+                    while (playerNumber == Integer.parseInt(currentPlayer.getId()) || playerNumber > playerCount
+                            || playerNumber != (int) playerNumber) {
+                        System.out.println("Can't pick yourself or a non-existing player! Try again: ");
+                        playerNumber = input.nextInt();
+                    }
 
                     Player targetPlayer = players.get(playerNumber - 1);
 
@@ -99,33 +109,16 @@ public class Main {
                         targetCardValue = Integer.parseInt(targetCard);
                     }
 
-                    System.out.println(targetCardValue + " " + targetPlayer.getName());
-
                     int numOfMatches = goFish.askPlayerForCard(targetPlayer, targetCardValue);
                     if (numOfMatches < 1) {
                         goFish.goFishing(currentPlayer, deck);
                         activeTurn = false;
                         counter++;
-
                     } else {
-                        GoFish.getCardsFromPlayer(currentPlayer, targetPlayer, targetCardValue);
-
-                        if (goFish.hasBook(currentPlayer)) {
-                            currentPlayer.score++;
-
-                            ArrayList<Card> currentPlayerHand = currentPlayer.getHand();
-                            int currentPlayerHandSize = currentPlayerHand.size();
-
-                            for (int i = currentPlayerHandSize; i > 0; i--) {
-                                Card card = currentPlayerHand.get(i - 1);
-                                if (card.getValue() == targetCardValue) {
-                                    currentPlayerHand.remove(card);
-
-                                }
-                            }
-                        }
-
+                        goFish.getCardsFromPlayer(currentPlayer, targetPlayer, targetCardValue);
+                        goFish.removeIfHasBook(currentPlayer, targetCardValue);
                     }
+                    goFish.removeIfHasBook(currentPlayer, targetCardValue);
 
                     for (Player player : players) {
                         System.out.println(player.getName());
@@ -133,17 +126,11 @@ public class Main {
                     }
 
                 } while (activeTurn);
-
             }
-
         }
 
-        System.out.print("Please select from the list using the number: ");
+        goFish.declareWinner(players);
 
-        // TEMPORARY (PROVES CREATION OF PLAYERS AND HANDS)
-        for (Player player : players) {
-            System.out.println(player.getName());
-        }
         input.close();
     }
 }
