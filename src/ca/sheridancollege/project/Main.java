@@ -64,7 +64,8 @@ public class Main {
 
                 // TURN START
                 for (int i = 0; i < playerCount; i++) {
-                    System.out.println("Current Player Turn: " + players.get(playerCount).getName());
+                    Player currentPlayer = players.get(i);
+                    System.out.println("Current Player Turn: " + currentPlayer.getName());
 
                     System.out.print(
                             "Please select player to confront from the list using the number besides the name: ");
@@ -79,22 +80,34 @@ public class Main {
                     String targetCard = input.next();
 
                     // GETS INPUTTED CARD VALUE REGARDLESS OF LETTER
-                    int cardValue;
+                    int targetCardValue;
                     if (targetCard.equalsIgnoreCase("A")) {
-                        cardValue = 1;
+                        targetCardValue = 1;
                     } else if (targetCard.equalsIgnoreCase("J")) {
-                        cardValue = 11;
+                        targetCardValue = 11;
                     } else if (targetCard.equalsIgnoreCase("Q")) {
-                        cardValue = 12;
+                        targetCardValue = 12;
                     } else if (targetCard.equalsIgnoreCase("K")) {
-                        cardValue = 13;
+                        targetCardValue = 13;
                     } else {
-                        cardValue = Integer.parseInt(targetCard);
+                        targetCardValue = Integer.parseInt(targetCard);
                     }
 
-                    int numOfMatches = goFish.askPlayerForCard(targetPlayer, cardValue);
+                    int numOfMatches = goFish.askPlayerForCard(targetPlayer, targetCardValue);
                     if (numOfMatches < 1) {
                         activeTurn = false;
+                    } else {
+                        // get cards from the target player
+                        ArrayList<Card> currentPlayerHand = currentPlayer.getHand();
+                        ArrayList<Card> targetPlayerHand = targetPlayer.getHand();
+
+                        for (int j = 0; j < targetPlayerHand.size(); j++) {
+                            Card card = targetPlayerHand.get(j);
+                            if (card.getValue() == targetCardValue) {
+                                currentPlayerHand.add(card);
+                                targetPlayerHand.remove(card);
+                            }
+                        }
                     }
 
                 }
