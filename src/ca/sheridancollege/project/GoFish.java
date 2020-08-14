@@ -74,6 +74,24 @@ public class GoFish extends Game {
         System.out.println("The winner is " + name + "with a score of " + max);
     }
 
+    public void removeIfBook(Player currentPlayer, int targetCardValue){
+
+        if (hasBook(currentPlayer)) {
+            currentPlayer.score++;
+
+            ArrayList<Card> currentPlayerHand = currentPlayer.getHand();
+            int currentPlayerHandSize = currentPlayerHand.size();
+
+            for (int i = currentPlayerHandSize; i > 0; i--) {
+                Card card = currentPlayerHand.get(i - 1);
+                if (card.getValue() == targetCardValue) {
+                    currentPlayerHand.remove(card);
+                }
+            }
+        }
+    }
+
+
     public boolean hasBook(Player player) {
         ArrayList<Card> hand = player.getHand();
         int[] ranks = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
