@@ -6,7 +6,7 @@ import java.util.Scanner;
 /**
  *This is the main class from the go fish game that
  holds the main method game
- * @modifier Barrett, 2020
+ * @modifier Barrett, Esteban, Chris 2020
  */
 public class Main {
 

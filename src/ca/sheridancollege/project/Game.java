@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * The class that models the game.
  * 
- * @modifier Barrett, 2020
+ * @modifier Barrett, Esteban, Chris 2020
  */
 public abstract class Game {
 

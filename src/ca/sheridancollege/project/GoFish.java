@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
  *This class is for the fo-fish methods used to play the game
- * @modifier Barrett, 2020
+ * @modifier Barrett, Esteban, Chris 2020
  */
 public class GoFish extends Game {
 
@@ -105,7 +105,7 @@ public class GoFish extends Game {
             }
         }
     }
-    
+
     /**
      * seeing if there is a book in the player
      * @param player

@@ -6,7 +6,7 @@ import java.util.Collections;
 /**
  * A concrete class that represents any grouping of cards for a Game.
  * 
- * @modifier Barrett, 2020
+ * @modifier Barrett, Esteban, Chris 2020
  */
 public class GroupOfCards {
 

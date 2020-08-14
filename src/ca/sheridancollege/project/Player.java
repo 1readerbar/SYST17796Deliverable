@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * A class that models each Player in the game. Players have an identifier,
  * that is unique.
  * 
- * @modifier Barrett, 2020
+ * @modifier Barrett, Esteban, Chris 2020
  */
 public class Player {
 

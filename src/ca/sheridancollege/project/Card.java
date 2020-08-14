@@ -3,7 +3,7 @@ package ca.sheridancollege.project;
 /**
  * A class is be used as the base Card class for the go-fish game.
  * 
- * @modifier Barrett, 2020
+ * @modifier Barrett, Esteban, Chris 2020
  */
 public class Card {
 
