@@ -13,6 +13,7 @@ package ca.sheridancollege.project;
  * @author dancye, 2018
  */
 public class Card {
+    
     private int value;
     // default modifier for child classes
 

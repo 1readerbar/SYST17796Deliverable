@@ -64,7 +64,7 @@ public class Main {
 
                 // TURN START
                 for (int i = 0; i < playerCount; i++) {
-                    System.out.println("Current Player Turn: " + players.get(playerCount).getName());
+                    System.out.println("Current Player Turn: " + players.get(i).getName());
 
                     System.out.print(
                             "Please select player to confront from the list using the number besides the name: ");
